@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOfferRequest;
+use App\Models\Category;
+use App\Models\Location;
+use App\Models\Offer;
+use App\Services\Offerservices;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -19,15 +24,21 @@ class OfferController extends Controller
      */
     public function create()
     {
-        return view('offers.create');
+        $this->authorize('create', Offer::class);
+        $categories = Category::orderBy('title')->get();
+        $locations = Location::orderBy('title')->get();
+        return view('offers.create',compact('categories','locations'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOfferRequest $request, Offerservices $offerservices)
     {
-        //
+        $this->authorize('create', Offer::class);
+        $offerservices->store($request->validated());
+
+        return redirect()->back()->with(['success' => 'Offer created']);
     }
 
     /**
