@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Offer extends Model
 {
     use HasFactory;
+    public const PLACEHOLDER_IMAGE_PATH = 'images/placeholder.png';
+
      protected $fillable = [
         'title',
         'price',

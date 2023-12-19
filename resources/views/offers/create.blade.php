@@ -58,6 +58,9 @@
                 {{-- image --}}
                 <div class="mb-5">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Image</label>
+                    <div class="flex items-center justify-center p-4">
+                        <img class="w-64 h-48 object-cover rounded-3xl" src="{{ asset(\App\Models\Offer::PLACEHOLDER_IMAGE_PATH) }}" alt="" id="image_upload">
+                    </div>
                     <input name="image"
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                      id="image" type="file">
@@ -87,6 +90,7 @@
             </form>
         </a>
    </div>
+   @include('layouts.scripts.image_upload')
    <script>
         var settings = {
             plugins: ['remove_button'],
