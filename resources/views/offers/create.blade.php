@@ -3,7 +3,7 @@
         <a href="#"
             class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h1 class="text-center font-bold">Create Offer</h1>
-            <form action="{{ route('offers.store') }}" method="post" class="max-w-sm mx-auto">
+            <form action="{{ route('offers.store') }}" method="post" class="max-w-sm mx-auto" enctype="multipart/form-data">
                 @csrf
                 {{-- title --}}
                 <div class="mb-5">
@@ -73,7 +73,7 @@
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description <span class="text-red-600">*</span> </label>
                     <textarea id="description" name="description" rows="4"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Description" value="{{ old('description') }}"></textarea>
+                        placeholder="Description" required value="{{ old('description') }}"></textarea>
                         @error('description')
                             <p class="text-red-700 p-2">{{ $message }}</p>
                         @enderror
