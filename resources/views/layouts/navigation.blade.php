@@ -15,7 +15,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                   <a href="http://" class="py-5">Offers</a>
+                    @if (auth()->user()->isAdmin())
+                         <a href="{{ route('offers.index') }}" class="flex items-center font-heading font-medium hover:text-darkBlueGray-400">Offers</a>
+                    @else
+                         <a href="{{ route('offers.my') }}"
+                         class=" flex items-center font-heading font-medium hover:text-darkBlueGray-400">My Offers</a>
+                    @endif
                 </div>
             </div>
 

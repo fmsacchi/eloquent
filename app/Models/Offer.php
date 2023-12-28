@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -12,7 +14,8 @@ class Offer extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
-    public const PLACEHOLDER_IMAGE_PATH = 'images/placeholder.png';
+    use SoftDeletes;
+    public const PLACEHOLDER_IMAGE_PATH = 'place.jpg';
 
      protected $fillable = [
         'title',
@@ -29,4 +32,14 @@ class Offer extends Model implements HasMedia
     {
         return $this->belongsToMany(Location::class);
     }
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+   public function getImageUrlAttribute(): string
+   {
+        return $this->hasMedia()
+        ? $this->getFirstMediaUrl()
+        : self::PLACEHOLDER_IMAGE_PATH; 
+   }
 }
